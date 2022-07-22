@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add post</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<form th:action="@{/posts/new}" th:object="${post}" method="post">
+<table border="1" align="center">
+  <tr>
+    <td>Title</td>
+    <td><input type="text" th:field="*{title}"></td>
+  </tr>
+    <tr>
+        <td>Content</td>
+        <td><input type="text" th:field="*{context}"></td>
+    </tr>
+</table>
+    <button type="submit">Save</button>
+</form>
+
+</body>
+</html>
