@@ -2,10 +2,11 @@ create sequence posts_seq start 1 increment 1;
 create sequence users_seq start 1 increment 1;
 create table posts
 (
-    id      int8 not null,
-    context text,
-    title   varchar(255),
-    user_id int8,
+    id       int8 not null,
+    context  text,
+    filename varchar(255),
+    title    varchar(255),
+    user_id  int8,
     primary key (id)
 );
 create table users
@@ -17,4 +18,4 @@ create table users
     roles    varchar(255),
     primary key (id)
 );
-alter table if exists posts add constraint posts_fk_user foreign key (user_id) references users;
+alter table if exists posts add constraint post_fk_users foreign key (user_id) references users;

@@ -4,7 +4,6 @@ import com.example.boardposts.domains.Role;
 import com.example.boardposts.domains.User;
 import com.example.boardposts.dto.UserDTO;
 import com.example.boardposts.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -47,10 +46,6 @@ public class UserServiceImpl implements UserService {
                 .build();
         userRepository.save(user);
         return true;
-    }
-
-    public void save(User user) {
-        userRepository.save(user);
     }
 
     public List<UserDTO> getAll() {

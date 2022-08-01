@@ -1,18 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" >
 <head th:replace="fragments/common :: common_header">
     <meta charset="UTF-8">
-    <title>Posts</title>
+    <title>All Posts</title>
 </head>
 <body>
 
 <div class="container">
     <div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
-    <div class="d-flex justify-content-center mt-2">
-        <a th:href="@{posts/new}" class="btn btn-success btn-sm" tabindex="-1" role="button" aria-disabled="true">Add
-            Post</a>
-    </div>
 
     <div class="d-flex align-items-center flex-column bd-highlight mb-3">
         <div th:each="post:${posts}">
@@ -20,16 +16,6 @@
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
                         <span th:text="${post.user.name}">Username</span>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button id="btnGroupDrop1" type="button" class="btn btn-outline-light dropdown-toggle"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                            ...
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><a class="dropdown-item" th:href="@{'/posts/' + ${post.id} + '/edit'}"  >Edit</a></li>
-                            <li><a class="dropdown-item" th:href="@{'/posts/' + ${post.id} + '/delete'}">Delete</a></li>
-                        </ul>
                     </div>
                 </div>
                 <div th:if="${post.filename} != null">
@@ -42,7 +28,6 @@
             </div>
         </div>
     </div>
-
 </div>
 
 

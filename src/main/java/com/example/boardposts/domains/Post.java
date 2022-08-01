@@ -1,14 +1,13 @@
 package com.example.boardposts.domains;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
-@Data
+
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,4 +27,5 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    private String filename;
 }

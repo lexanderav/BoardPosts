@@ -1,5 +1,4 @@
 package com.example.boardposts.mapper;
-
 import com.example.boardposts.domains.Post;
 import com.example.boardposts.dto.PostDTO;
 import org.mapstruct.InheritInverseConfiguration;

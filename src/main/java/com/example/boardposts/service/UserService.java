@@ -8,8 +8,6 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService { //security
     boolean save(UserDTO userDTO);
-    void save(User user);
     List<UserDTO> getAll();
-
     User findByName(String name);
 }
