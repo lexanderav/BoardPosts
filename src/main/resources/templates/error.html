@@ -5,9 +5,8 @@
     <title>Error</title>
 </head>
 <body>
-<div class="container">
-    <div th:insert="~{fragments/menu :: #nav-menu}"></div>
-</div>
+
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
 <p th:utext="${errorMessage}">Error java.lang.NullPointerException</p>
 

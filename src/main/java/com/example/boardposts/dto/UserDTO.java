@@ -8,8 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class UserDTO {
+    private String id;
     private String name;
     private String password;
     private String matchingPassword;
     private String email;
+    private String filename;
 }

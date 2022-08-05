@@ -5,8 +5,8 @@
     <title>Menu</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-secondary bg-gradient rounded-bottom" id="nav-menu">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg rounded-bottom" id="nav-menu">
+    <div class="container">
         <a class="navbar-brand" th:href="@{/posts/all}">BOARD</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -15,26 +15,27 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" aria-current="page" th:href="@{/posts}">My Posts</a>
+                    <a class="nav-link" th:href="@{/posts/new}" aria-disabled="true">AddPost</a>
                 </li>
                 <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
                     <a class="nav-link" aria-current="page" th:href="@{/users/get}">Users</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')">
+                <li class="nav-item nav-name" sec:authorize="hasAnyAuthority('ADMIN')">
                     <a class="nav-link" aria-current="page" th:href="@{/users/new}">Add User</a>
                 </li>
             </ul>
-            <div>
+            <div class="align-items-center">
                 <div class="align-items-center" sec:authorize="isAuthenticated()">
-                    <a class="link" sec:authentication="principal.username" >Username</a>
-                    <a th:href="@{/logout}" class="btn btn-success btn-sm" tabindex="-1" role="button"
+                    <a class="text-success nav-name" sec:authentication="principal.username" type="button"
+                        th:href="@{/users/show}">Username</a>
+                    <a th:href="@{/logout}" class="btn nav-btn btn-sm" tabindex="-1" role="button"
                        aria-disabled="true">Logout</a>
                 </div>
             </div>
             <div class="align-items-center" sec:authorize="!isAuthenticated()">
                 <div>
-                    Hello, Unknown. Please <a th:href="@{/login}" class="btn btn-success btn-sm" tabindex="-1"
-                                              role="button" aria-disabled="true">Login</a>
+                    <a th:href="@{/login}" class="btn nav-btn btn-sm" tabindex="-1"
+                       role="button" aria-disabled="true">Login</a>
                 </div>
             </div>
         </div>
@@ -42,3 +43,4 @@
 </nav>
 </body>
 </html>
+

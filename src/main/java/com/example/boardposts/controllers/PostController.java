@@ -54,7 +54,7 @@ public class PostController {
             dto.setFilename(resultFileName);
         }
        postService.addUserPost(dto, principal.getName());
-       return "redirect:/posts";
+       return "redirect:/users/show";
     }
 
     @GetMapping
@@ -64,7 +64,7 @@ public class PostController {
         List<PostDTO> postDTOS = postService.getByUsername(principal.getName());
         Collections.reverse(postDTOS);
         model.addAttribute("posts", postDTOS);
-        return "postList";
+        return "fragments/postList";
     }
 
     @GetMapping("/{id}/edit")

@@ -1,0 +1,92 @@
+
+* {
+    font-family: 'Cairo', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+body {
+    background-color: #f3eae8;
+}
+
+/*MENU*/
+
+.container {
+    padding: 0;
+}
+
+.navbar {
+    background-color: #fffaf4;
+}
+
+.navbar-brand, .nav-link, .nav-name {
+    color: #61652a;
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+}
+
+.navbar-brand {
+    margin-right: 3rem;
+}
+
+.nav-btn {
+    background-color: #61652a;
+    color: antiquewhite;
+}
+
+.navbar-brand:hover {
+    color: green;
+}
+.nav-link:hover {
+    color: green;
+}
+
+.nav-name {
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.img-log {
+    object-fit: contain;
+}
+
+.card-log {
+    position: fixed;
+    height: 100vh;
+}
+
+.card {
+    padding: 0;
+}
+
+/* USER */
+
+.user-row {
+    display: inline-block;
+    width: 100%;
+}
+
+.user-info {
+    float: left;
+    margin-right: 1rem;
+}
+
+.user-post {
+    float: left;
+}
+
+.user-nav {
+    float: left;
+    width: 12rem;
+}
+
+.card-header, .btn-card-header {
+    max-height: 2rem;
+}
+
+.btn-card-header {
+    border: none;
+}
+
+.user-card-posts {
+    margin-bottom: 1rem;
+}

@@ -6,35 +6,47 @@
 </head>
 <body>
 
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
 <section class="container">
-    <div th:insert="~{fragments/menu :: #nav-menu}"></div>
 
-    <div class="d-flex justify-content-center mt-3">
-        <div class="card bg-light" style="width: 18rem;">
-            <div class="d-flex justify-content-center mt-3 mb-3">
-                <form th:action="@{/users/new}" method="post" th:object="${user}">
+    <div class="d-flex justify-content-center mt-3 ">
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-6">
+                    <img src="https://sun9-33.userapi.com/impg/q4TUHb_3jiWdF56B6LaFOMKffYD_KG7wVNdWUg/uD71RdgU6uw.jpg?size=1200x1600&quality=95&sign=46f14ab12c87395e1018f763fbdc65c1&type=album"
+                         class="img-log img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-6 align-self-center">
+                    <div class="card-body" >
+                        <div class="d-flex justify-content-center mt-3 mb-3">
+                            <form th:action="@{/users/new}" method="post" th:object="${user}">
 
-                    <div class="input-group mb-3">
-                        <input type="text" th:field="*{name}" name="username" class="form-control"
-                               placeholder="Username">
+                                <div class="input-group mb-3">
+                                    <input type="text" th:field="*{name}" name="username" class="form-control"
+                                           placeholder="Username">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" th:field="*{password}" name="password" class="form-control"
+                                           placeholder="Password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="password" th:field="*{matchingPassword}" name="password" class="form-control"
+                                           placeholder="Confirm password">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <input type="email" th:field="*{email}" name="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="d-grid gap-2 col-6 mx-auto">
+                                    <input class="btn btn-secondary btn-sm" tabindex="-1" type="submit" value="Save">
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="input-group mb-3">
-                        <input type="password" th:field="*{password}" name="password" class="form-control"
-                               placeholder="Password">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="password" th:field="*{matchingPassword}" name="password" class="form-control"
-                               placeholder="Confirm password">
-                    </div>
-                    <div class="input-group mb-3">
-                        <input type="email" th:field="*{email}" name="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <input class="btn btn-secondary btn-sm" tabindex="-1" type="submit" value="Save">
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 <div th:insert="~{fragments/common :: #copy_js}"></div>

@@ -26,4 +26,5 @@ public class User {
     private Role roles;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Post> posts;
+    private String filename;
 }

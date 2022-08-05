@@ -50,13 +50,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/posts/all", "/static/**", "/img/**", "/avatar/**", "/users/new").permitAll()
                 .antMatchers("/users/get").hasAuthority(Role.ADMIN.name())
-                .anyRequest().permitAll()
+                .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/login")
-                    .failureUrl("/login-error")
                     .loginProcessingUrl("/auth")
+                    .defaultSuccessUrl("/posts/all", true)
+                    .failureUrl("/login-error")
                     .permitAll()
                 .and()
                     .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

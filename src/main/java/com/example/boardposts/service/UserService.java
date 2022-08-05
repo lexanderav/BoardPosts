@@ -10,4 +10,10 @@ public interface UserService extends UserDetailsService { //security
     boolean save(UserDTO userDTO);
     List<UserDTO> getAll();
     User findByName(String name);
+
+    UserDTO show(Long id);
+
+    void update(UserDTO dto);
+
+    UserDTO findByNameForDTO(String name);
 }
