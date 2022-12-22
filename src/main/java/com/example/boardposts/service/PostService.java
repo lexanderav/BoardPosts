@@ -9,6 +9,8 @@ public interface PostService {
     List<PostDTO> getAll();
     void addUserPost(PostDTO dto, String name);
     List<PostDTO> getByUsername(String name);
+//    void addUserPost(PostDTO dto, Long id);
+    List<PostDTO> getListPostsByUserId(Long id);
     PostDTO show(Long idPost);
     void update(PostDTO postDTO);
     void delete(Long id);

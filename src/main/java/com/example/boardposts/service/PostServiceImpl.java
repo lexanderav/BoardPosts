@@ -52,6 +52,14 @@ public class PostServiceImpl implements PostService {
         return postDTOS;
     }
 
+
+    @Override
+    public List<PostDTO> getListPostsByUserId(Long id) {
+        User user = userService.findUserById(id);
+
+        return null;
+    }
+
     @Override
     public void update(PostDTO postDTO) {
         Post post = postRepository.findById(postDTO.getId()).get();

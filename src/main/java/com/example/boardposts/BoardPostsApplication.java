@@ -10,8 +10,8 @@ public class BoardPostsApplication {
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(BoardPostsApplication.class, args);
-        PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
-        System.out.println(passwordEncoder.encode("admin"));
+        //PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
+        //System.out.println(passwordEncoder.encode("admin"));
     }
 
 }

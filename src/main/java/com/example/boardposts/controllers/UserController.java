@@ -1,6 +1,7 @@
 package com.example.boardposts.controllers;
 
 import com.example.boardposts.dto.PostDTO;
+import com.example.boardposts.dto.SmallUserDTO;
 import com.example.boardposts.dto.UserDTO;
 import com.example.boardposts.service.PostService;
 import com.example.boardposts.service.UserService;
@@ -30,23 +31,14 @@ public class UserController {
         this.userService = userService;
         this.postService = postService;
     }
-
     @GetMapping("/new")
     public String newUser(Model model){
         model.addAttribute("user", new UserDTO());
         return "user";
     }
-
-    @GetMapping("/get")
-    public String userList(Model model) {
-        model.addAttribute("users", userService.getAll());
-        return "userList";
-    }
-
     @PostMapping("/new")
     public String saveUser(@ModelAttribute("user") UserDTO dto,
                            Model model){
-
         if (userService.save(dto)) {
             return "redirect:/login";
         } else {
@@ -54,37 +46,37 @@ public class UserController {
         }
         return "user";
     }
+    @GetMapping("/get")
+    public String userList(Model model) {
+        model.addAttribute("users", userService.getAll());
+        return "userList";
+    }
 
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") Long id,
                         Model model) {
-        model.addAttribute("user", userService.show(id));
+        SmallUserDTO dto = userService.show(id);
+        model.addAttribute("user", dto);
         return "editUser";
     }
 
 
-    @PostMapping("/update")
-    public String update(UserDTO dto,
-                         @RequestParam("file") MultipartFile file
-    ) throws IOException {
-
-            if (!file.isEmpty()) {
-                File uploadDir = new File(uploadPathUser);
-
-                if (!uploadDir.exists()) {
-                    uploadDir.mkdir();
-                }
-
-                String uuidFile = UUID.randomUUID().toString();
-                String resultFileName = uuidFile + "." + file.getOriginalFilename();
-
-                file.transferTo(new File(uploadPathUser + "/" + resultFileName));
-
-                dto.setFilename(resultFileName);
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable("id") Long id,
+                         SmallUserDTO dto,
+                         @RequestParam("file") MultipartFile file) throws IOException {
+        if (!file.isEmpty()) {
+            File uploadDir = new File(uploadPathUser);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdirs();
             }
-
-            userService.update(dto);
-            return "redirect:/users/show";
+            String uuidFile = UUID.randomUUID().toString();
+            String resultFileName = uuidFile + "." + file.getOriginalFilename();
+            file.transferTo(new File(uploadPathUser + "/" + resultFileName));
+            dto.setFilename(resultFileName);
+        }
+        userService.update(id, dto);
+        return "redirect:/users/show";
     }
 
     @GetMapping("/show")

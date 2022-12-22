@@ -1,7 +1,9 @@
 package com.example.boardposts.controllers;
 
 import com.example.boardposts.dto.PostDTO;
+import com.example.boardposts.dto.SmallUserDTO;
 import com.example.boardposts.service.PostService;
+import com.example.boardposts.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +21,10 @@ import java.util.UUID;
 @RequestMapping("/posts")
 public class PostController {
     private final PostService postService;
+    private final UserService userService;
 
-    public PostController(PostService postService) {
+    public PostController(UserService userService, PostService postService) {
+        this.userService = userService;
         this.postService = postService;
     }
 
@@ -36,14 +40,13 @@ public class PostController {
     @PostMapping("/new")
     public String savePost(PostDTO dto,
                            Principal principal,
-                           @RequestParam("file") MultipartFile file
-    ) throws IOException {
+                           @RequestParam("file") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
 
             File uploadDir = new File(uploadPath);
 
             if (!uploadDir.exists()) {
-                uploadDir.mkdir();
+                uploadDir.mkdirs();
             }
 
             String uuidFile = UUID.randomUUID().toString();
@@ -78,13 +81,13 @@ public class PostController {
     public String updatePost(PostDTO postDTO)
     {
         postService.update(postDTO);
-        return "redirect:/posts";
+        return "redirect:/users/show";
     }
 
     @GetMapping("/{id}/delete")
     public String deletePost(@PathVariable("id") Long id) {
         postService.delete(id);
-        return "redirect:/posts";
+        return "redirect:/users/show";
     }
 
     @GetMapping("/all")

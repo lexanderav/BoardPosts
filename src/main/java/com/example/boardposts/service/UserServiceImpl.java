@@ -2,7 +2,9 @@ package com.example.boardposts.service;
 
 import com.example.boardposts.domains.Role;
 import com.example.boardposts.domains.User;
+import com.example.boardposts.dto.SmallUserDTO;
 import com.example.boardposts.dto.UserDTO;
+import com.example.boardposts.mapper.SmallUserMapper;
 import com.example.boardposts.mapper.UserMapper;
 import com.example.boardposts.repository.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,6 +23,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserMapper mapper = UserMapper.MAPPER;
+    private final SmallUserMapper mapperSmallUser = SmallUserMapper.MAPPER;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -40,6 +43,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findUserById(Long id) {
+        User user = userRepository.findById(id).get();
+        return user;
+    }
+
+    @Override
+    public SmallUserDTO findSmallUserDTOByIdUser(Long id) {
+        User user = userRepository.findById(id).get();
+        return mapperSmallUser.fromUser(user);
+    }
+
+    @Override
+    public List<UserDTO> getAll() {
+        return mapper.fromUserDTOList(userRepository.findAll().stream().collect(Collectors.toList()));
+    }
+
+    @Override
     public boolean save(UserDTO userDTO) {
         if (!Objects.equals(userDTO.getPassword(), userDTO.getMatchingPassword())) {
             throw new RuntimeException("Password not equals");
@@ -55,8 +75,9 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
-    public List<UserDTO> getAll() {
-        return mapper.fromUserDTOList(userRepository.findAll().stream().collect(Collectors.toList()));
+    public SmallUserDTO show(Long id) {
+        User user = userRepository.findById(id).get();
+        return mapperSmallUser.fromUser(user);
     }
 
     @Override
@@ -73,21 +94,19 @@ public class UserServiceImpl implements UserService {
                 roles);
     }
 
-    public UserDTO show(Long id) {
-        User user = userRepository.findById(id).get();
-        return mapper.fromUser(user);
-    }
-
-    public void update(UserDTO dto) {
+    @Override
+    public void update(Long id, SmallUserDTO dto) {
         boolean checked = false;
-        User user = userRepository.findFirstByName(dto.getName());
-        if (!user.getName().equals(dto.getName())) {
+        User user = userRepository.findById(id).get();
+        if (dto.getName()!=null && !user.getName().equals(dto.getName())) {
             user.setName(dto.getName());
             checked = true;
-        } else if (!user.getEmail().equals(dto.getEmail())) {
+        }
+        if (dto.getEmail() != null && !user.getEmail().equals(dto.getEmail())) {
             user.setEmail(dto.getEmail());
             checked = true;
-        } else if (!user.getFilename().equals(dto.getFilename())) {
+        }
+        if (user.getFilename()==null || !user.getFilename().equals(dto.getFilename())) {
             user.setFilename(dto.getFilename());
             checked = true;
         }
